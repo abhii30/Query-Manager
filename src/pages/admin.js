@@ -1,14 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Admin = () => {
   const [queries, setQueries] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/queries")
-      .then((response) => setQueries(response.data))
-      .catch((error) => console.error(error));
+    const isAdmin = localStorage.getItem("isAdmin");
+    const loginTimestamp = localStorage.getItem("loginTimestamp");
+
+    if (!isAdmin || !loginTimestamp) {
+      router.push("/admin-login");
+      return;
+    }
+
+    const now = Date.now();
+    const loginTime = parseInt(loginTimestamp, 10);
+
+    if (now - loginTime > 4 * 60 * 60 * 1000) {
+      // 4 hours in milliseconds
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("loginTimestamp");
+      router.push("/admin-login");
+    } else {
+      axios
+        .get("http://localhost:5000/api/queries")
+        .then((response) => setQueries(response.data))
+        .catch((error) => console.error(error));
+    }
   }, []);
 
   const updateStatus = async (id, status) => {
