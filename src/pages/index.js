@@ -21,36 +21,43 @@ const Home = () => {
   };
 
   return (
-    <div className="p-2 relative h-screen">
-      <button onClick={handleAdminClick} className="p-2 rounded bg-green-200 justify-end flex">
+    <div className="p-4 relative h-screen bg-[#00000082]">
+      <button
+        onClick={handleAdminClick}
+        className="px-4 py-2 rounded-xl bg-[#171717] justify-end flex absolute top-4 right-4 text-white"
+      >
         Admin?
       </button>
-      <button
-        className="p-2 rounded bg-blue-400 text-white absolute right-2 bottom-2"
-        onClick={handleAddQueryClick}
-      >
-        + Add Query
-      </button>
-      <h1 className="text-2xl">All Queries</h1>
-      <ul className="flex gap-2">
+
+      <div className="flex gap-4 items-center mb-3">
+        <h1 className="text-2xl">All Queries</h1>
+        <button
+          className="px-4 py-2 rounded-xl bg-blue-400 text-white "
+          onClick={handleAddQueryClick}
+        >
+          + Add Query
+        </button>
+      </div>
+
+      <ul className="gap-4 grid sm:grid-cols-3 lg:grid-cols-4">
         {queries.map((query) => (
           <li
             key={query._id}
-            className="flex border flex-col  px-4 py-2 w-full"
+            className="flex shadow-xl rounded-xl flex-col px-4 py-2 w-full gap-3 bg-[#F5F5F5]"
           >
             <h2 className="text-xl font-semibold uppercase">{query.title}</h2>
             <p className="normal-case">{query.description}</p>
 
             <p>Status: {query.status}</p>
-            <p className="my-1">
+            <p className="my-1 flex flex-wrap gap-2">
               {query.tags.map((tag, index) => {
                 return (
-                  <span
+                  <div
                     key={index}
-                    className="bg-green-200 text-green-800 px-2 py-1 rounded mr-2"
+                    className="bg-green-200 text-green-800 px-2 py-1 rounded "
                   >
                     {tag}
-                  </span>
+                  </div>
                 );
               })}
             </p>

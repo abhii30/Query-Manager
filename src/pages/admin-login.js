@@ -18,8 +18,9 @@ const AdminLogin = () => {
     }
   };
 
-  return (
-    <div>
+return (
+  <div className="flex justify-center items-center h-screen">
+    <div className="flex flex-col items-center shadow-2xl p-8 w-1/2 md:w-1/3 lg:p-20 rounded-lg">
       <h1>Admin Login</h1>
       <form onSubmit={handleLogin}>
         <input
@@ -40,7 +41,9 @@ const AdminLogin = () => {
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default AdminLogin;

@@ -45,30 +45,49 @@ const Admin = () => {
     setQueries([...queries]);
   };
 
+  const deleteQuery = async (id) => {
+    await axios.delete(`http://localhost:5000/api/queries/${id}`);
+    setQueries(queries.filter((query) => query._id !== id));
+  };
+
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <ul>
+    <div className="p-4 bg-[#00000082] h-screen">
+      <h1 className="text-2xl">Admin Dashboard</h1>
+      <ul className="grid grid-cols-2 gap-4 mt-4">
         {queries.map((query) => (
-          <li key={query._id}>
-            <h2>{query.title}</h2>
-            <p>{query.description}</p>
-            <p>Tags: {query.tags.join(", ")}</p>
-            <p>Status: {query.status}</p>
-            <button onClick={() => updateStatus(query._id, "unsolved")}>
-              Unsolved
-            </button>
-            <button onClick={() => updateStatus(query._id, "under progress")}>
-              Under Progress
-            </button>
-            <button onClick={() => updateStatus(query._id, "solved")}>
-              Solved
-            </button>
+          <li key={query._id} className=" gap-1 rounded shadow-lg p-4 bg-white">
+            <h2 className="text-2xl capitalize mb-2">{query.title}</h2>
+            <p className="bg-slate-300 p-2 rounded-lg">{query.description}</p>
+            <p className="capitalize">Tags: {query.tags.join(", ")}</p>
+            <p className="capitalize">Status: {query.status}</p>
+
+            <div className="flex flex-row gap-2">
+              <button
+                onClick={() => updateStatus(query._id, "unsolved")}
+                className="rounded bg-red-500 px-2 py-1 text-white"
+              >
+                Unsolved
+              </button>
+              <button
+                onClick={() => updateStatus(query._id, "under progress")}
+                className="rounded bg-blue-500 px-2 py-1 text-white"
+              >
+                Under Progress
+              </button>
+              <button
+                onClick={() => updateStatus(query._id, "solved")}
+                className="rounded bg-green-500 px-2 py-1 text-white"
+              >
+                Solved
+              </button>
+            </div>
+
             <input
+              className=""
               type="text"
               placeholder="Add reply"
               onKeyDown={(e) => {
-                if (e.key === "Enter" && e.target.value.trim() !== ""){
+                if (e.key === "Enter" && e.target.value.trim() !== "") {
                   addReply(query._id, e.target.value);
                   e.target.value = "";
                 }

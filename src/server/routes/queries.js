@@ -20,4 +20,8 @@ router.put("/:id", async (req, res) => {
   res.send(query);
 });
 
+router.delete("/:id", async (req, res) => {
+  const query = await Query.findByIdAndDelete(req.params.id);
+  res.send(query);
+});
 module.exports = router;
