@@ -67,9 +67,12 @@ const Admin = () => {
             <input
               type="text"
               placeholder="Add reply"
-              onKeyDown={(e) =>
-                e.key === "Enter" && addReply(query._id, e.target.value)
-              }
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && e.target.value.trim() !== ""){
+                  addReply(query._id, e.target.value);
+                  e.target.value = "";
+                }
+              }}
             />
             <h3>Replies</h3>
             <ul>
