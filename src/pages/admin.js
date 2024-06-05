@@ -63,22 +63,22 @@ const Admin = () => {
 
             <div className="flex flex-row gap-2">
               <button
-                onClick={() => updateStatus(query._id, "unsolved")}
-                className="rounded bg-red-500 px-2 py-1 text-white"
+                onClick={() => updateStatus(query._id, "Unresolved")}
+                className="rounded bg-red-400 px-2 py-1 text-white"
               >
-                Unsolved
+                Unresolved
               </button>
               <button
-                onClick={() => updateStatus(query._id, "under progress")}
-                className="rounded bg-blue-500 px-2 py-1 text-white"
+                onClick={() => updateStatus(query._id, "In Progress")}
+                className="rounded bg-yellow-400 px-2 py-1 text-white"
               >
-                Under Progress
+                In Progress
               </button>
               <button
-                onClick={() => updateStatus(query._id, "solved")}
-                className="rounded bg-green-500 px-2 py-1 text-white"
+                onClick={() => updateStatus(query._id, "Resolved")}
+                className="rounded bg-green-400 px-2 py-1 text-white"
               >
-                Solved
+                Resolved
               </button>
             </div>
 

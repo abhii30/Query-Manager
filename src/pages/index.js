@@ -19,6 +19,11 @@ const Home = () => {
   const handleAddQueryClick = () => {
     router.push("/add-query");
   };
+  const statusColor = {
+    Unresolved: "bg-red-400",
+    "In Progress": "bg-yellow-400",
+    Resolved: "bg-green-400",
+  };
 
   return (
     <div className="p-4 relative h-screen bg-[#00000082]">
@@ -43,20 +48,25 @@ const Home = () => {
         {queries.map((query) => (
           <li
             key={query._id}
-            className="flex shadow-xl rounded-xl flex-col px-4 py-2 w-full gap-3 bg-[#F5F5F5]"
+            className="flex shadow-xl rounded-xl flex-col px-4 py-2 w-full gap-1 bg-[#F5F5F5]"
           >
             <h2 className="text-xl font-semibold uppercase">{query.title}</h2>
-            <p className="normal-case">{query.description}</p>
+            <p className="normal-case leading-5 mb-2">{query.description}</p>
 
-            <p>Status: {query.status}</p>
-            <p className="my-1 flex flex-wrap gap-2">
+            <p>
+              Status:{" "}
+              <span className={`${statusColor[query.status]} px-2 py-1 rounded-lg`}>
+                {query.status}
+              </span>
+            </p>
+            <p className="my-1 flex flex-wrap gap-1">
               {query.tags.map((tag, index) => {
                 return (
                   <div
                     key={index}
-                    className="bg-green-200 text-green-800 px-2 py-1 rounded "
+                    className="bg-slate-400 text-black px-2 py-1 rounded text-xs lowercase flex align-middle"
                   >
-                    {tag}
+                    {"#" + tag}
                   </div>
                 );
               })}
