@@ -15,7 +15,10 @@ const AddQuery = () => {
       description,
       tags: tags.split(",").map((tag) => tag.trim()),
     };
-    await axios.post("http://localhost:5000/api/queries/add", newQuery);
+    await axios.post(
+      "https://query-manager.onrender.com/api/queries/add",
+      newQuery
+    );
     alert("Query added successfully");
     router.push("/");
   };

@@ -8,7 +8,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/queries")
+      .get("https://query-manager.onrender.com/api/queries")
       .then((response) => setQueries(response.data))
       .catch((error) => console.error(error));
   }, []);

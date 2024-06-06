@@ -25,14 +25,14 @@ const Admin = () => {
       router.push("/admin-login");
     } else {
       axios
-        .get("http://localhost:5000/api/queries")
+        .get("https://query-manager.onrender.com/api/queries")
         .then((response) => setQueries(response.data))
         .catch((error) => console.error(error));
     }
   }, []);
 
   const updateStatus = async (id, status) => {
-    await axios.put(`http://localhost:5000/api/queries/${id}`, { status });
+    await axios.put(`https://query-manager.onrender.com/api/queries/${id}`, { status });
     setQueries(
       queries.map((query) => (query._id === id ? { ...query, status } : query))
     );
@@ -41,12 +41,12 @@ const Admin = () => {
   const addReply = async (id, message) => {
     const query = queries.find((query) => query._id === id);
     query.replies.push({ message });
-    await axios.put(`http://localhost:5000/api/queries/${id}`, query);
+    await axios.put(`https://query-manager.onrender.com/api/queries/${id}`, query);
     setQueries([...queries]);
   };
 
   const deleteQuery = async (id) => {
-    await axios.delete(`http://localhost:5000/api/queries/${id}`);
+    await axios.delete(`https://query-manager.onrender.com/api/queries/${id}`);
     setQueries(queries.filter((query) => query._id !== id));
   };
 
