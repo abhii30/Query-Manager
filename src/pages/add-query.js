@@ -16,6 +16,7 @@ const AddQuery = () => {
       tags: tags.split(",").map((tag) => tag.trim()),
     };
     await axios.post("http://localhost:5000/api/queries/add", newQuery);
+    alert("Query added successfully");
     router.push("/");
   };
 

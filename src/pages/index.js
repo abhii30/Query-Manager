@@ -24,6 +24,12 @@ const Home = () => {
     "In Progress": "bg-yellow-400",
     Resolved: "bg-green-400",
   };
+  const formateDate = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}/${
+      d.getMonth() + 1
+    }/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+  };
 
   return (
     <div className="p-4 relative h-screen bg-[#00000082]">
@@ -55,7 +61,9 @@ const Home = () => {
 
             <p>
               Status:{" "}
-              <span className={`${statusColor[query.status]} px-2 py-1 rounded-lg`}>
+              <span
+                className={`${statusColor[query.status]} px-2 py-1 rounded-lg`}
+              >
                 {query.status}
               </span>
             </p>
@@ -74,7 +82,12 @@ const Home = () => {
             <h3>Replies</h3>
             <ul>
               {query.replies.map((reply, index) => (
-                <li key={index}>{reply.message}</li>
+                <li key={index} className="flex justify-between items-center">
+                  <span className="capitalize">{reply.message}</span>{" "}
+                  <span className="text-xs text-gray-500">
+                    {formateDate(reply.date)}
+                  </span>
+                </li>
               ))}
             </ul>
           </li>

@@ -4,7 +4,7 @@ const querySchema = new mongoose.Schema({
   title: String,
   description: String,
   tags: [String],
-  status: { type: String, default: "unsolved" },
+  status: { type: String, default: "Unresolved" },
   replies: [{ message: String, date: { type: Date, default: Date.now } }],
 });
 

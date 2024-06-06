@@ -50,40 +50,59 @@ const Admin = () => {
     setQueries(queries.filter((query) => query._id !== id));
   };
 
+  const handleHomeClick = () => {
+    router.push("/");
+  };
+
+  const formateDate = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}/${
+      d.getMonth() + 1
+    }/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+  };
   return (
-    <div className="p-4 bg-[#00000082] h-screen">
+    <div className="p-4 bg-[#00000082] h-screen relative">
       <h1 className="text-2xl">Admin Dashboard</h1>
+      <button
+        onClick={handleHomeClick}
+        className="px-4 py-2 rounded-xl bg-zinc-800 justify-end flex absolute top-4 right-4 text-white"
+      >
+        All Queries
+      </button>
       <ul className="grid grid-cols-2 gap-4 mt-4">
         {queries.map((query) => (
-          <li key={query._id} className=" gap-1 rounded shadow-lg p-4 bg-white">
+          <li
+            key={query._id}
+            className=" gap-1 rounded shadow-lg p-4 bg-white relative"
+          >
             <h2 className="text-2xl capitalize mb-2">{query.title}</h2>
             <p className="bg-slate-300 p-2 rounded-lg">{query.description}</p>
             <p className="capitalize">Tags: {query.tags.join(", ")}</p>
             <p className="capitalize">Status: {query.status}</p>
 
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-row gap-2 flex-wrap">
               <button
                 onClick={() => updateStatus(query._id, "Unresolved")}
-                className="rounded bg-red-400 px-2 py-1 text-white"
+                className="rounded bg-red-400 px-2 py-1 text-white leading-6"
               >
                 Unresolved
               </button>
               <button
                 onClick={() => updateStatus(query._id, "In Progress")}
-                className="rounded bg-yellow-400 px-2 py-1 text-white"
+                className="rounded bg-yellow-400 px-2 py-1 text-white leading-6"
               >
                 In Progress
               </button>
               <button
                 onClick={() => updateStatus(query._id, "Resolved")}
-                className="rounded bg-green-400 px-2 py-1 text-white"
+                className="rounded bg-green-400 px-2 py-1 text-white leading-6"
               >
                 Resolved
               </button>
             </div>
 
             <input
-              className=""
+              className="w-full mt-2 h-10 p-2 border border-gray-300 rounded-lg focus:outline-none"
               type="text"
               placeholder="Add reply"
               onKeyDown={(e) => {
@@ -96,9 +115,23 @@ const Admin = () => {
             <h3>Replies</h3>
             <ul>
               {query.replies.map((reply, index) => (
-                <li key={index}>{reply.message}</li>
+                <li key={index} className="flex justify-between items-center">
+                  <span className="capitalize">{reply.message}</span>{" "}
+                  <span className="text-xs text-gray-500">
+                    {formateDate(reply.date)}
+                  </span>
+                </li>
               ))}
             </ul>
+            <button
+              className="absolute top-4 right-4"
+              onClick={() => {
+                deleteQuery(query._id);
+                alert("Query Deleted");
+              }}
+            >
+              <img src="/delete-icon.png" alt="delete" />
+            </button>
           </li>
         ))}
       </ul>
