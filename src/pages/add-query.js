@@ -30,7 +30,7 @@ const AddQuery = () => {
         <form onSubmit={handleSubmit} className="gap-2 p-2 w-full">
           <h1 className="text-2xl text-">Add Query</h1>
           <input
-            className="w-full p-2 my-2 border border-gray-300 rounded"
+            className="w-full p-2 my-2 border border-gray-300 rounded focus:outline-none"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -39,7 +39,7 @@ const AddQuery = () => {
           />
 
           <textarea
-            className="w-full p-2 my-2 border border-gray-300 rounded "
+            className="w-full p-2 my-2 border border-gray-300 rounded focus:outline-none"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
@@ -47,7 +47,7 @@ const AddQuery = () => {
             required
           ></textarea>
           <input
-            className="w-full p-2 my-2 border border-gray-300 rounded"
+            className="w-full p-2 my-2 border border-gray-300 rounded focus:outline-none"
             type="text"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
