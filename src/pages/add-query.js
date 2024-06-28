@@ -28,7 +28,7 @@ const AddQuery = () => {
       <div className="w-1/2">
         {" "}
         <form onSubmit={handleSubmit} className="gap-2 p-2 w-full">
-          <h1 className="text-2xl text-">Add Query</h1>
+          <h1 className="text-2xl text-white">Add Query</h1>
           <input
             className="w-full p-2 my-2 border border-gray-300 rounded focus:outline-none"
             type="text"
@@ -55,7 +55,7 @@ const AddQuery = () => {
             required
           />
           <button
-            className="w-full p-2 my-2  bg-green-600 text-white rounded"
+            className="w-full p-2 my-2  bg-black text-white rounded"
             type="submit"
           >
             Add Query

@@ -32,7 +32,9 @@ const Admin = () => {
   }, []);
 
   const updateStatus = async (id, status) => {
-    await axios.put(`https://query-manager.onrender.com/api/queries/${id}`, { status });
+    await axios.put(`https://query-manager.onrender.com/api/queries/${id}`, {
+      status,
+    });
     setQueries(
       queries.map((query) => (query._id === id ? { ...query, status } : query))
     );
@@ -41,7 +43,10 @@ const Admin = () => {
   const addReply = async (id, message) => {
     const query = queries.find((query) => query._id === id);
     query.replies.push({ message });
-    await axios.put(`https://query-manager.onrender.com/api/queries/${id}`, query);
+    await axios.put(
+      `https://query-manager.onrender.com/api/queries/${id}`,
+      query
+    );
     setQueries([...queries]);
   };
 
@@ -50,19 +55,23 @@ const Admin = () => {
     setQueries(queries.filter((query) => query._id !== id));
   };
 
+  const deleteReply = async (queryId, replyId) => {
+    const query = queries.find((query) => query._id === queryId);
+    query.replies.splice(replyId, 1);
+    await axios.put(
+      `https://query-manager.onrender.com/api/queries/${queryId}`,
+      query
+    );
+    setQueries([...queries]);
+  };
+
   const handleHomeClick = () => {
     router.push("/");
   };
 
-  const formateDate = (date) => {
-    const d = new Date(date);
-    return `${d.getDate()}/${
-      d.getMonth() + 1
-    }/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
-  };
   return (
     <div className="p-4 bg-[#00000082] h-screen relative">
-      <h1 className="text-2xl">Admin Dashboard</h1>
+      <h1 className="text-2xl text-white">Admin Dashboard</h1>
       <button
         onClick={handleHomeClick}
         className="px-4 py-2 rounded-xl bg-zinc-800 justify-end flex absolute top-4 right-4 text-white"
@@ -109,17 +118,22 @@ const Admin = () => {
                 if (e.key === "Enter" && e.target.value.trim() !== "") {
                   addReply(query._id, e.target.value);
                   e.target.value = "";
-                }
+                } 
               }}
             />
             <h3>Replies</h3>
-            <ul>
+            <ul className="flex flex-col-reverse">
               {query.replies.map((reply, index) => (
-                <li key={index} className="flex justify-between items-center">
-                  <span className="capitalize">{reply.message}</span>{" "}
-                  <span className="text-xs text-gray-500">
-                    {formateDate(reply.date)}
-                  </span>
+                <li key={index} className="flex gap-2 items-center ">
+                  <span className="text-sm">{reply.message}</span>{" "}
+                  <button
+                    className=""
+                    onClick={() => {
+                      deleteReply(query._id, index);
+                    }}
+                  >
+                    <img src="/delete-icon.png" alt="delete" className="h-4" />
+                  </button>
                 </li>
               ))}
             </ul>

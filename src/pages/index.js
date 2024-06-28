@@ -26,9 +26,7 @@ const Home = () => {
   };
   const formateDate = (date) => {
     const d = new Date(date);
-    return `${d.getDate()}/${
-      d.getMonth() + 1
-    }/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
   };
 
   return (
@@ -41,7 +39,7 @@ const Home = () => {
       </button>
 
       <div className="flex gap-4 items-center mb-3">
-        <h1 className="text-2xl">All Queries</h1>
+        <h1 className="text-2xl text-white">All Queries</h1>
         <button
           className="px-4 py-2 rounded-xl bg-blue-400 text-white "
           onClick={handleAddQueryClick}
@@ -80,10 +78,10 @@ const Home = () => {
               })}
             </p>
             <h3>Replies</h3>
-            <ul>
+            <ul className="flex flex-col-reverse">
               {query.replies.map((reply, index) => (
                 <li key={index} className="flex justify-between items-center">
-                  <span className="capitalize">{reply.message}</span>{" "}
+                  <span className="text-sm">{reply.message}</span>{" "}
                   <span className="text-xs text-gray-500">
                     {formateDate(reply.date)}
                   </span>
