@@ -78,7 +78,7 @@ const Admin = () => {
       >
         All Queries
       </button>
-      <ul className="grid grid-cols-2 gap-4 mt-4">
+      <ul className="grid sm:grid-cols-2 gap-4 mt-4 lg:grid-cols-3">
         {queries.map((query) => (
           <li
             key={query._id}
