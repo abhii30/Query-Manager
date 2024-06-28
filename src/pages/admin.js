@@ -118,7 +118,7 @@ const Admin = () => {
                 if (e.key === "Enter" && e.target.value.trim() !== "") {
                   addReply(query._id, e.target.value);
                   e.target.value = "";
-                } 
+                }
               }}
             />
             <h3>Replies</h3>
@@ -132,19 +132,19 @@ const Admin = () => {
                       deleteReply(query._id, index);
                     }}
                   >
-                    <img src="/delete-icon.png" alt="delete" className="h-4" />
+                    <img src="/cross-icon.png" alt="delete" className="h-4" />
                   </button>
                 </li>
               ))}
             </ul>
             <button
-              className="absolute top-4 right-4"
+              className="absolute top-1 right-1 "
               onClick={() => {
                 deleteQuery(query._id);
                 alert("Query Deleted");
               }}
             >
-              <img src="/delete-icon.png" alt="delete" />
+              <img src="/delete-icon.png" alt="delete" className="h-5" />
             </button>
           </li>
         ))}
